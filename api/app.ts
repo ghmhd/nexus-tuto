@@ -1,8 +1,4 @@
-import { schema } from "nexus";
-import { db } from "./db";
+import { schema, use } from "nexus";
+import { prisma } from "nexus-plugin-prisma";
 
-schema.addToContext(() => {
-  return {
-    db,
-  };
-});
+use(prisma());
