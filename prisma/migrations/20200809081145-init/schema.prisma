@@ -1,6 +1,6 @@
 datasource db {
   provider = "sqlite"
-  url = "file:./file.db"
+  url = "***"
 }
 
 generator prisma_client {
@@ -16,21 +16,14 @@ model User {
   enabled Boolean @default(false)
   sex Int 
 
-  posts Post[]
-  profileId Int @unique
-  profile Profile @relation (fields: [profileId], references: [id])
-
-
-  groupId Int 
-  group Group @relation(fields: [groupId], references: [id])
-
 }
 
 model Profile {
   id Int @id @default(autoincrement())
   birthDate DateTime?
-  profilePicture String @default("/images/profile.jpg")
-  user User
+  profilePicture String
+
+
 }
 
 model Post {
@@ -38,24 +31,11 @@ model Post {
   body String
   title String
   published Boolean
-
-  autorId Int
-  author  User @relation(fields: [autorId], references: [id])
 }
 
 
 model Message {
   id Int @id @default(autoincrement())
   content String
-  fromId Int
-  from User @relation(fields: [fromId], references: [id])
-
-  
-}
-
-model Group {
-  id Int @id @default(autoincrement())
-  name String 
-  participants User[]
   
 }
